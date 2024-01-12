@@ -1,6 +1,8 @@
 -- Instances: 147 | Scripts: 0 | Modules: 1
 local DRR = {};
 
+print("UI Library Loaded")
+
 -- DrRay
 DRR["1"] = Instance.new("ScreenGui", game:GetService("CoreGui"));
 DRR["1"]["IgnoreGuiInset"] = true;
