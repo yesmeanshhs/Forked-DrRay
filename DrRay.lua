@@ -1784,7 +1784,7 @@ game:GetService("Debris"):AddItem(btss,0)
 for i, list in ipairs(newListTable) do
 	local newddbtn = reserved.DropdownButton:Clone()
 	newddbtn.Visible = true
-		newddbtn.Parent = dd.Box.ScrollingFrame
+		newddbtn.Parent = newTab:FindFirstChild(name).Box.ScrollingFrame
                    newddbtn.Name = list
 			newddbtn.name.Text = list
 			task.spawn(function()
