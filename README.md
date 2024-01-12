@@ -103,7 +103,17 @@ tab.newDropdown("SelectedDropdownName", "Select one of these options!", {"water"
     print(selectedOption)
 end)
 ```
-**Yesmeanshhs Modification**
+
+**Argument 1: Name/Title (type: `string`)**
+
+**Argument 2: Description  (type: `string`)**
+
+**Argument 3: Table listing the options (type: `table`)**
+
+**Argument 4: Function to execute, returns the selected option inside the table (return: table_value) (type: `function`)**
+
+***Yesmeanshhs Modification***
+
 Updating a dropdown menus easily.
 
 ```lua
@@ -119,13 +129,11 @@ print("Target Exists: "..SelectedOption)
 end)
 ```
 
-**Argument 1: Name/Title (type: `string`)**
+**Argument 1: Name/Title (Must Exist) (type: `string`)**
 
-**Argument 2: Description  (type: `string`)**
+**Argument 2: New table listing options (type: `table`)**
 
-**Argument 3: Table listing the options (type: `table`)**
-
-**Argument 4: Function to execute, returns the selected option inside the table (return: string) (type: `function`)**
+**Argument 3: Function to execute overwriting last dropdown, returns the selected option inside the table (return: table_value) (type: `function`)**
 
 ### Keybind
 
