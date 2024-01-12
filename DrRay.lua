@@ -1768,12 +1768,7 @@ function UILIB.newTab(name, img)
 		end)
 	end
 
-	return self
-end
-
-		-- Line of Modded rayhub for better experience
-
-function self.updateDropdown(name,newListTable,func)
+	function self.updateDropdown(name,newListTable,func)
 			if newTab:FindFirstChild(name) then
 local dd = newTab:FindFirstChild(name)
 				if dd:FindFirstChild("ScrollingFrame",true) then
@@ -1806,6 +1801,9 @@ for i, list in ipairs(newListTable) do
 
 end
 end
+end
+
+	return self
 end
 
 
