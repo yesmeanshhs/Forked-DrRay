@@ -99,8 +99,23 @@ end)
 Create dropdown menus easily.
 
 ```lua
-tab.newDropdown("Dropdown", "Select one of these options!", {"water", "dog", "air", "bb", "airplane", "wohhho", "yeay", "delete"}, function(selectedOption)
+tab.newDropdown("SelectedDropdownName", "Select one of these options!", {"water", "dog", "air", "bb", "airplane", "wohhho", "yeay", "delete"}, function(selectedOption)
     print(selectedOption)
+end)
+```
+**Yesmeanshhs Modification**
+Updating a dropdown menus easily.
+
+```lua
+local players = game:GetService"Players"
+local tableofplayers = {}
+players.PlayerAdded:Connect(function(plr)
+table.insert(tableofplayers,plr.Name)
+tab.updateDropdown("SelectedDropdownName",tableofplayers,function(SelectedOption)
+  if players:FindFirstChild(SelectedOption) then
+print("Target Exists: "..SelectedOption)
+    end
+  end)
 end)
 ```
 
@@ -210,6 +225,7 @@ window:SetTheme(mainColor, secondColor)
 
 # Credit
 This UI library made by **.chillz.** (Discord)
+UI Library Modified by **yesmeanshhs**, we live on the same country.
 
 [MIT License](./LICENSE)
 
