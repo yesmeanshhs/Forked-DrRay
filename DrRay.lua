@@ -1769,6 +1769,37 @@ function UILIB.newTab(name, img)
 	return self
 end
 
+function self.updateDropdown(name,newListTable,func)
+			if newTab:FindFirstChild(name) then
+local dd = newTab:FindFirstChild(name)
+				if dd:FindFirstChild("ScrollingFrame",true) then
+local ddbuttons = dd:FindFirstChild("ScrollingFrame",true)
+					for _, btss in ipairs(ddbuttons:GetChildren()) do
+						if btss:IsA("TextButton") then
+game:GetService("Debris"):AddItem(btss,0)
+						end
+					end
+for i, list in ipairs(newListTable) do
+	local newddbtn = reserved.DropdownButton:Clone()
+	newddbtn.Visible = true
+		newddbtn.Parent = newdd.Box.ScrollingFrame
+                   newddbtn.Name = list
+			newddbtn.name.Text = list
+			task.spawn(function()
+				newddbtn.MouseButton1Click:Connect(function()
+					newdd.DropdownBar.Open.Text = list
+					local twPos = twServ:Create(newdd.Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0,0, 0)})
+					twPos:Play()
+					twPos.Completed:Wait()
+					newdd.Box.Visible = false
+					func(list)
+				end)
+			end)
+		end
+
+end
+end
+end
 
 
 
