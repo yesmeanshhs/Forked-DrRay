@@ -1769,6 +1769,7 @@ function UILIB.newTab(name, img)
 	end
 
 	function self.updateDropdown(name,newListTable,func)
+				task.spawn(function()
 			if newTab:FindFirstChild(name) then
 local dd = newTab:FindFirstChild(name)
 				if dd:FindFirstChild("ScrollingFrame",true) then
@@ -1776,7 +1777,7 @@ local ddbuttons = dd:FindFirstChild("ScrollingFrame",true)
 					for _, connection in ipairs(dropdowncon) do
 connection:Disconnect()
 					end
-					for _, btss in ipairs(ddbuttons:GetChildren()) do
+					for _, btss in ipairs(newTab:FindFirstChild(name):FindFirstChild("ScrollingFrame",true):GetChildren()) do
 						if btss:IsA("TextButton") then
 game:GetService("Debris"):AddItem(btss,0)
 						end
@@ -1803,6 +1804,7 @@ for i, list in ipairs(newListTable) do
 
 end
 end
+			end)
 end
 
 	return self
