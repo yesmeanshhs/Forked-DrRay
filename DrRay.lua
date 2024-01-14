@@ -1789,12 +1789,14 @@ for i, list in ipairs(newListTable) do
 			newddbtn.name.Text = list
 			task.spawn(function()
 				table.insert(dropdowncon,newddbtn.MouseButton1Click:Connect(function()
-					newdd.DropdownBar.Open.Text = list
-					local twPos = twServ:Create(newdd.Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0,0, 0)})
+												if newTab:FindFirstChild(name) then
+					newTab:FindFirstChild(name).DropdownBar.Open.Text = list
+					local twPos = twServ:Create(newTab:FindFirstChild(name).Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0,0, 0)})
 					twPos:Play()
 					twPos.Completed:Wait()
-					newdd.Box.Visible = false
+					newTab:FindFirstChild(name).Box.Visible = false
 					func(list)
+												end
 				end))
 			end)
 		end
