@@ -1674,7 +1674,7 @@ function UILIB.newTab(name, img)
 	end
 	
 	function self.newToggle(title, desc, toggle, func)
-		local realToggle = toggle
+		local realToggle = false
 		local newToggle = reserved.Toggle:Clone()
 		newToggle.Parent = newTab
 		newToggle.Name = title
