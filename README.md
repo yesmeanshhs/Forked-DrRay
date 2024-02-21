@@ -61,12 +61,9 @@ end)
 Use toggles that can be turned on or off.
 
 ```lua
-tab.newToggle("Toggle", "Toggle! (prints the state)", true, function(toggleState)
-    if toggleState then
-        print("On")
-    else
-        print("Off")
-    end
+-- default togglestate is false
+tab.newToggle("Toggle", "Toggle! (prints the state)", function(toggleState)
+    print("The state is"..tostring(toggleState))
 end)
 ```
 
@@ -74,9 +71,7 @@ end)
 
 **Argument 2: Description (type: `string`)**
 
-**Argument 3: Default toggle state (type: `boolean`)**
-
-**Argument 4: Function to execute (return: `bool`) (type: `function`)**
+**Argument 3: Function to execute (return: `bool`) (type: `function`, function parameter: `custom`) (default state: `false`)**
 
 ### Input Text
 
@@ -114,26 +109,22 @@ end)
 
 ***Yesmeanshhs Modification***
 
-Updating a dropdown menus easily.
+Updating dropdown menus easily.
 
 ```lua
-local players = game:GetService"Players"
-local tableofplayers = {}
-players.PlayerAdded:Connect(function(plr)
-table.insert(tableofplayers,plr.Name)
-tab.updateDropdown("SelectedDropdownName",tableofplayers,function(SelectedOption)
-  if players:FindFirstChild(SelectedOption) then
-print("Target Exists: "..SelectedOption)
-    end
-  end)
+local dropdown
+dropdown = tab.newDropdown("SelectedDropdownName", "Select one of these options!", {"water", "dog", "air", "bb", "airplane", "wohhho", "yeay", "delete"}, function(selectedOption)
+    print(selectedOption)
 end)
+
+task.wait(1)
+
+dropdown:Refresh({"New option!"})
 ```
 
-**Argument 1: Name/Title (Must Exist) (type: `string`)**
+**Variable definer: Defines the selected dropdown you want to refresh (type: `variable`)**
 
-**Argument 2: New table listing options (type: `table`)**
-
-**Argument 3: Function to execute overwriting last dropdown, returns the selected option inside the table (return: table_value) (type: `function`)**
+**Argument 1: Table listing the new options (type: `table`)**
 
 ### Keybind
 
