@@ -1725,6 +1725,7 @@ function UILIB.newTab(name, img)
 			local dropdowncon = {}
 	
 	function self.newDropdown(name, desc, listTable, func)
+		local DropdownFun = {}
 		local newdd = reserved.Dropdown:Clone()
 		newdd.Visible = true
 		newdd.Parent = newTab
@@ -1766,6 +1767,34 @@ function UILIB.newTab(name, img)
 				newdd.Box.Visible = false
 			end
 		end)
+			function DropdownFun:Refresh(newList)
+                        for _, x in pairs(newdd.Box.ScrollingFrame:GetChildren()) do
+                        x:Destroy()
+		        end
+			for _, v in pairs(dropdowncon) do
+                        v:Disconnect()
+			end
+		        for i, list in ipairs(newList) do
+			local newddbtn = reserved.DropdownButton:Clone()
+			newddbtn.Visible = true
+			newddbtn.Parent = newdd.Box.ScrollingFrame
+
+			newddbtn.Name = list
+			newddbtn.name.Text = list
+			task.spawn(function()
+				table.insert(dropdowncon,newddbtn.MouseButton1Click:Connect(function()
+					newdd.DropdownBar.Open.Text = list
+					local twPos = twServ:Create(newdd.Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0,0, 0)})
+					twPos:Play()
+					twPos.Completed:Wait()
+					newdd.Box.Visible = false
+					func(list)
+				end))
+			    end)
+		        end		
+
+		end
+        return DropdownFun
 	end
 
 	function self.updateDropdown(name,newListTable,func)
