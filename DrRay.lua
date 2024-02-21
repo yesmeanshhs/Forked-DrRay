@@ -1768,12 +1768,14 @@ function UILIB.newTab(name, img)
 			end
 		end)
 			function DropdownFun:Refresh(newList)
-                        for _, x in pairs(newdd.Box.ScrollingFrame:GetChildren()) do
-                        x:Destroy()
-		        end
-			for _, v in pairs(dropdowncon) do
-                        v:Disconnect()
+			for _, vvv in pairs(dropdowncon) do
+                        vvv:Disconnect()
 			end
+                        for _, xgg in pairs(newdd.Box.ScrollingFrame:GetChildren()) do
+			if xgg:IsA("TextButton") then
+                        game:GetService("Debris"):AddItem(xgg,0)
+			end
+		        end
 		        for i, list in ipairs(newList) do
 			local newddbtn = reserved.DropdownButton:Clone()
 			newddbtn.Visible = true
