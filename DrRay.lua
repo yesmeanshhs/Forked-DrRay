@@ -1798,47 +1798,7 @@ function UILIB.newTab(name, img)
 		end
         return DropdownFun
 	end
-
-	function self.updateDropdown(name,newListTable,func)
-				task.spawn(function()
-			if newTab:FindFirstChild(name) then
-local dd = newTab:FindFirstChild(name)
-				if dd:FindFirstChild("ScrollingFrame",true) then
-local ddbuttons = dd:FindFirstChild("ScrollingFrame",true)
-					for _, connection in ipairs(dropdowncon) do
-connection:Disconnect()
-					end
-					for _, btss in ipairs(newTab:FindFirstChild(name):FindFirstChild("ScrollingFrame",true):GetChildren()) do
-						if btss:IsA("TextButton") then
-game:GetService("Debris"):AddItem(btss,0)
-						end
-					end
-for i, list in ipairs(newListTable) do
-	local newddbtn = reserved.DropdownButton:Clone()
-	newddbtn.Visible = true
-		newddbtn.Parent = newTab:FindFirstChild(name).Box.ScrollingFrame
-                   newddbtn.Name = list
-			newddbtn.name.Text = list
-			task.spawn(function()
-				table.insert(dropdowncon,newddbtn.MouseButton1Click:Connect(function()
-												if newTab:FindFirstChild(name) then
-					newTab:FindFirstChild(name).DropdownBar.Open.Text = list
-					local twPos = twServ:Create(newTab:FindFirstChild(name).Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0,0, 0)})
-					twPos:Play()
-					twPos.Completed:Wait()
-					newTab:FindFirstChild(name).Box.Visible = false
-					func(list)
-												end
-				end))
-			end)
-		end
-
-end
-end
-			end)
-end
-
-	return self
+return self
 end
 
 
