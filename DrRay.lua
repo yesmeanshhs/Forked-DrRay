@@ -1674,6 +1674,7 @@ function UILIB.newTab(name, img)
 	end
 	
 	function self.newToggle(title, desc, func)
+		local ToggleFun = {}
 		local realToggle = false
 		local newToggle = reserved.Toggle:Clone()
 		newToggle.Parent = newTab
@@ -1700,8 +1701,17 @@ function UILIB.newTab(name, img)
 		elseif realToggle == false then
 			newToggle.Label.BackgroundColor3 = GlobalColor1
 		end
-		
-		
+
+		function ToggleFun:Update(State,Name)
+		local NewName = Name or newToggle.Title.Text
+		realToggle = State
+		if realToggle == true then
+	        newToggle.Label.BackgroundColor3 = GlobalColor2
+		elseif realToggle == false then
+		newToggle.Label.BackgroundColor3 = GlobalColor1
+		end
+		newToggle.Title.Text = NewName
+		end
 		
 		newToggle.Label.Label.MouseButton1Click:Connect(function()
 			
@@ -1719,7 +1729,8 @@ function UILIB.newTab(name, img)
 				func(realToggle)
 			end
 		end)
-		
+
+	return ToggleFun
 	end
 
 			local dropdowncon = {}
