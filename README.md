@@ -73,6 +73,29 @@ end)
 
 **Argument 3: Function to execute (return: `bool`) (type: `function`, function parameter: `custom`) (default state: `false`)**
 
+*Yesmeanshhs Modificafion*
+
+Updating a toggle state or title.
+
+```lua
+local toggle
+toggle = tab.newToggle("Toggle", "Toggle! (prints the state)", function(toggleState)
+    print("The state is"..tostring(toggleState))
+end)
+
+task.wait(1)
+
+toggle:Update(false,"Optional new title!")
+
+task.wait(1)
+-- Updating without changing the title
+toggle:Update(true)
+```
+
+**Argument 1: Desired State (type: `bool`)**
+
+**Argument 2: Optional New Title (Optional) (type: `string` or none)**
+
 ### Input Text
 
 Get input text from the user.
@@ -107,7 +130,7 @@ end)
 
 **Argument 4: Function to execute, returns the selected option inside the table (return: table_value) (type: `function`)**
 
-***Yesmeanshhs Modification***
+*Yesmeanshhs Modification*
 
 Updating dropdown menus easily.
 
