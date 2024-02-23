@@ -78,23 +78,30 @@ end)
 Updating a toggle state or title.
 
 ```lua
+-- Create a variable that will define the toggle
 local toggle
 toggle = tab.newToggle("Toggle", "Toggle! (prints the state)", function(toggleState)
     print("The state is"..tostring(toggleState))
 end)
 
 task.wait(1)
-
-toggle:Update(false,"Optional new title!")
+-- The toggle is not able to be interacted by the user now
+-- Update the toggle with the assigned variable and custom function
+toggle:Update(false,true,"Manual activation only title!")
 
 task.wait(1)
 -- Updating without changing the title
-toggle:Update(true)
+-- It is now able to be interacted by the user
+toggle:Update(true,false)
 ```
+
+**Variable definer: Defines the selected toggle you want to update through assigning with variables (type: `variable`)**
 
 **Argument 1: Desired State (type: `bool`)**
 
-**Argument 2: Optional New Title (Optional) (type: `string` or none)**
+**Argument 2: Manual Activation (This is when you want the user unable to interact with the toggle but can interact within manual coding) (type: `bool`)**
+
+**Argument 3: Optional New Title (Optional) (type: `string` or none)**
 
 ### Input Text
 
@@ -135,17 +142,18 @@ end)
 Updating dropdown menus easily.
 
 ```lua
+-- Define the selected dropdown by variable
 local dropdown
 dropdown = tab.newDropdown("SelectedDropdownName", "Select one of these options!", {"water", "dog", "air", "bb", "airplane", "wohhho", "yeay", "delete"}, function(selectedOption)
     print(selectedOption)
 end)
 
 task.wait(1)
-
+-- Refresh the dropdown by calling the variable custom function
 dropdown:Refresh({"New option!"})
 ```
 
-**Variable definer: Defines the selected dropdown you want to refresh (type: `variable`)**
+**Variable definer: Defines the selected dropdown you want to refresh through assigning with variables (type: `variable`)**
 
 **Argument 1: Table listing the new options (type: `table`)**
 
