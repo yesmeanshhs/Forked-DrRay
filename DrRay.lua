@@ -1508,6 +1508,7 @@ function UILIB.newTab(name, img)
 
 	function self.newLabel(text)
 		local newLabel = reserved.Label:Clone()
+		local LabelFun = {}
 		newLabel.Parent = newTab
 		newLabel.Visible = true
 		newLabel.Title.Text = text
@@ -1675,6 +1676,7 @@ function UILIB.newTab(name, img)
 	
 	function self.newToggle(title, desc, func)
 		local ToggleFun = {}
+                local ManualActivation = false
 		local realToggle = false
 		local newToggle = reserved.Toggle:Clone()
 		newToggle.Parent = newTab
@@ -1695,15 +1697,22 @@ function UILIB.newTab(name, img)
 			twBtn:Play()
 		end)
 		
-		
+		if ManualActivation == false then
 		if realToggle == true then
 			newToggle.Label.BackgroundColor3 = GlobalColor2
 		elseif realToggle == false then
 			newToggle.Label.BackgroundColor3 = GlobalColor1
 		end
+		end
 
-		function ToggleFun:Update(State,Name)
+		function ToggleFun:Update(State,ManualActivation,Name)
+		local Disabled = ManualActivation or false
 		local NewName = Name or newToggle.Title.Text
+		if Disabled == true then
+                ManualActivation = true
+		elseif Disabled == false then
+                ManualActivation = false
+		end
 		realToggle = State
 		if realToggle == true then
 	        newToggle.Label.BackgroundColor3 = GlobalColor2
@@ -1714,7 +1723,7 @@ function UILIB.newTab(name, img)
 		end
 		
 		newToggle.Label.Label.MouseButton1Click:Connect(function()
-			
+		   if ManualActivation == false then
 			if realToggle == true then
 				realToggle = false
 				local twColorOn = twServ:Create(newToggle.Label, TweenInfo.new(0.2), { BackgroundColor3 = GlobalColor1 })
@@ -1728,6 +1737,7 @@ function UILIB.newTab(name, img)
 				
 				func(realToggle)
 			end
+		    end
 		end)
 
 	return ToggleFun
