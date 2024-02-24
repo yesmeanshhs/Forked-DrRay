@@ -1511,7 +1511,7 @@ function UILIB.newTab(name, img)
 
 			twBtn:Play()
 		end)
-		newbtn.MouseButton1Click:Connect()
+		newbtn.MouseButton1Click:Connect(function()
 		if ManualActivation == false then
 		func()
 		end
