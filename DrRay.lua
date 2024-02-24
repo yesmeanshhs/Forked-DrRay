@@ -1498,7 +1498,7 @@ function UILIB.newTab(name, img)
 		function ButtonFun:Update(Title,ManualActivate)
 		local FixedMA = ManualActivate or false
 		ManualActivation = FixedMA
-		newbtn.Title.Text = tostring(Title)
+		newbtn.Title.Text = Title
 		end
 
 		newbtn.MouseEnter:Connect(function()
@@ -1741,7 +1741,7 @@ function UILIB.newTab(name, img)
 
 		function ToggleFun:Update(State,ManualActivate,Name)
 		local Disabled = ManualActivate or false
-		local NewName = tostring(Name) or newToggle.Title.Text
+		local NewName = Name or newToggle.Title.Text
                 ManualActivation = Disabled
 		realToggle = State
 		if realToggle == true then
