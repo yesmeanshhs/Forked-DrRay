@@ -1486,12 +1486,20 @@ function UILIB.newTab(name, img)
 	end)
 
 	function self.newButton(name, desc, func)
+		local ManualActivation = false
 		local newbtn = reserved.Button:Clone()
+		local ButtonFun = {}
 		newbtn.Parent = newTab
 		newbtn.Title.Text = name
 		newbtn.Description.Text = desc
 		newbtn.Visible = true
 		newbtn.Name = name
+
+		function ButtonFun:Update(Title,ManualActivate)
+		local FixedMA = ManualActivate or false
+		ManualActivation = FixedMA
+		newbtn.Title.Text = tostring(Title)
+		end
 
 		newbtn.MouseEnter:Connect(function()
 			local twBtn = twServ:Create(newbtn, TweenInfo.new(0.2), { Transparency = 0 })
@@ -1503,7 +1511,12 @@ function UILIB.newTab(name, img)
 
 			twBtn:Play()
 		end)
-		newbtn.MouseButton1Click:Connect(func)
+		newbtn.MouseButton1Click:Connect()
+		if ManualActivation == false then
+		func()
+		end
+		end) 
+	return ButtonFun
 	end
 
 	function self.newLabel(text)
@@ -1512,11 +1525,18 @@ function UILIB.newTab(name, img)
 		newLabel.Parent = newTab
 		newLabel.Visible = true
 		newLabel.Title.Text = text
+		newLabel.Name = text
 
-		return newLabel.Title
+		function LabelFun:Update(CustomTxt)
+		newLabel.Title.Text = tostring(CustomTxt)
+                newLabel.Name = tostring(CustomTxt)
+		end
+
+		return LabelFun
 	end
 
 	function self.newInput(name, desc, func)
+		local InputFun = {}
 		local newInput = reserved.Textbox:Clone()
 		local textbox = newInput.TextboxBar.ActualTextbox
 
@@ -1539,10 +1559,19 @@ function UILIB.newTab(name, img)
 		newInput.Description.Text = desc
 		newInput.Name = name
 
-		textbox.FocusLost:Connect(function()
-			func(textbox.Text)
-		end)
+		function InputFun:Update(Title,ManualActivate)
+		local FixedMA = ManualActivate or false
+		ManualActivation = FixedMA
+		newInput.Name = Title
+		newInput.Title.Text = Title
+		end
 
+		textbox.FocusLost:Connect(function() 
+		if ManualActivation == false then
+			func(textbox.Text) 
+		end
+		end)
+        return InputFun
 	end
 
 	function self.newKeybind(name, desc, func)
@@ -1697,28 +1726,20 @@ function UILIB.newTab(name, img)
 			twBtn:Play()
 		end)
 		
-		if ManualActivation == false then
-		if realToggle == true then
-			newToggle.Label.BackgroundColor3 = GlobalColor2
-		elseif realToggle == false then
-			newToggle.Label.BackgroundColor3 = GlobalColor1
-		end
-		end
+		newToggle.Label.BackgroundColor3 = GlobalColor1
 
-		function ToggleFun:Update(State,ManualActivation,Name)
-		local Disabled = ManualActivation or false
-		local NewName = Name or newToggle.Title.Text
-		if Disabled == true then
-                ManualActivation = true
-		elseif Disabled == false then
-                ManualActivation = false
-		end
+		function ToggleFun:Update(State,ManualActivate,Name)
+		local Disabled = ManualActivate or false
+		local NewName = tostring(Name) or newToggle.Title.Text
+                ManualActivation = Disabled
 		realToggle = State
 		if realToggle == true then
 	        newToggle.Label.BackgroundColor3 = GlobalColor2
+		func(realToggle)
 		elseif realToggle == false then
 		newToggle.Label.BackgroundColor3 = GlobalColor1
 		end
+		newToggle.Name = NewName
 		newToggle.Title.Text = NewName
 		end
 		
@@ -1747,6 +1768,7 @@ function UILIB.newTab(name, img)
 	
 	function self.newDropdown(name, desc, listTable, func)
 		local DropdownFun = {}
+		local ManualActivation = false
 		local newdd = reserved.Dropdown:Clone()
 		newdd.Visible = true
 		newdd.Parent = newTab
@@ -1763,13 +1785,15 @@ function UILIB.newTab(name, img)
 			newddbtn.Name = list
 			newddbtn.name.Text = list
 			task.spawn(function()
-				table.insert(dropdowncon,newddbtn.MouseButton1Click:Connect(function()
+				table.insert(dropdowncon,newddbtn.MouseButton1Click:Connect(function() 
+				if ManualActivation == false then
 					newdd.DropdownBar.Open.Text = list
 					local twPos = twServ:Create(newdd.Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0,0, 0)})
 					twPos:Play()
 					twPos.Completed:Wait()
 					newdd.Box.Visible = false
-					func(list)
+					func(list) 
+				end
 				end))
 			end)
 		end		
@@ -1788,15 +1812,18 @@ function UILIB.newTab(name, img)
 				newdd.Box.Visible = false
 			end
 		end)
-			function DropdownFun:Refresh(newList)
+			function DropdownFun:Update(newList,ManualActivate)
+			local FixedMA = ManualActivate or false
 			for _, vvv in pairs(dropdowncon) do
                         vvv:Disconnect()
 			end
+			table.clear(dropdowncon)
                         for _, xgg in pairs(newdd.Box.ScrollingFrame:GetChildren()) do
 			if xgg:IsA("TextButton") then
                         game:GetService("Debris"):AddItem(xgg,0)
 			end
 		        end
+			ManualActivation = FixedMA
 		        for i, list in ipairs(newList) do
 			local newddbtn = reserved.DropdownButton:Clone()
 			newddbtn.Visible = true
@@ -1806,12 +1833,14 @@ function UILIB.newTab(name, img)
 			newddbtn.name.Text = list
 			task.spawn(function()
 				table.insert(dropdowncon,newddbtn.MouseButton1Click:Connect(function()
+				if ManualActivation == false then
 					newdd.DropdownBar.Open.Text = list
 					local twPos = twServ:Create(newdd.Box, TweenInfo.new(0.15), {Size = UDim2.new(0.97, 0,0, 0)})
 					twPos:Play()
 					twPos.Completed:Wait()
 					newdd.Box.Visible = false
 					func(list)
+				end
 				end))
 			    end)
 		        end		
