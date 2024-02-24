@@ -40,6 +40,23 @@ local tab = DrRayLibrary.newTab("My Tab", "ImageIdHere")
 
 **Argument 2: The Image ID (type: `string`)**
 
+## Label
+
+Create labels for tabs easily!
+
+```lua
+tab.newLabel("This is a new label wow")
+```
+
+Update labels for your own importance
+
+```lua
+local Label
+Label = tab.newLabel("This is a new label wow")
+task.wait(1)
+Label:Update("New Text Label!")
+```
+
 ### Button
 
 Create functional buttons with ease!
@@ -55,6 +72,23 @@ end)
 **Argument 2: Description of the button (type: `string`)**
 
 **Argument 3: Function to execute when the button is clicked (type: `function`)**
+
+Update buttons for your own script!
+
+```lua
+local Button
+Button = tab.newButton("Button", "Prints Hello!", function()
+    print('Hello!')
+end)
+task.wait(3)
+-- The button now can only be activated by code
+Button:Update("New Button Name!",true)
+```
+
+**Argument 1: New Name Of The Button (type: `string`)**
+
+
+**Argument 2: Manual Activation (This makes the user can only activate the button through code) (type: `bool`)**
 
 ### Toggle
 
@@ -99,7 +133,7 @@ toggle:Update(true,false)
 
 **Argument 1: Desired State (type: `bool`)**
 
-**Argument 2: Manual Activation (This is when you want the user unable to interact with the toggle but can interact within manual coding) (type: `bool`)**
+**Argument 2: Manual Activation (This makes the user can only activate the toggle through code) (type: `bool`)**
 
 **Argument 3: Optional New Title (Optional) (type: `string` or none)**
 
@@ -155,7 +189,9 @@ dropdown:Refresh({"New option!"})
 
 **Variable definer: Defines the selected dropdown you want to refresh through assigning with variables (type: `variable`)**
 
-**Argument 1: Table listing the new options (type: `table`)**
+**Argument 2: Table listing the new options (type: `table`)**
+
+**Argument 3: Manual Activation (This makes the user can only activate the dropdown buttons through code) (type: `bool`)**
 
 ### Keybind
 
@@ -192,6 +228,22 @@ end)
 **Argument 4: Set to `false` for now (type: `boolean`)**
 
 **Argument 5: Function to execute (return: int) (type: `function`)**
+
+Update sliders easily!
+
+```lua
+local Slider
+Slider = tab.newSlider("Slider", "Epic slider", 1000, false, function(num)
+    print(num)
+end)
+task.wait(3)
+-- After 3 seconds the slider is only able to be activated by code
+Slider:Update("New Slider Name!",true)
+```
+
+**Argument 1: Manual Activation (This makes the user can only activate the button through code) (type: `bool`)**
+
+**Argument 2: Manual Activation (This makes the user can only activate the button through code) (type: `bool`)**
 
 ## Built-in UI Features
 
