@@ -1856,7 +1856,7 @@ function UILIB.newTab(name, img)
 			    end)
 		        end		
 
-		end
+		        end
         return DropdownFun
 	end
 return self
