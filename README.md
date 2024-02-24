@@ -28,6 +28,9 @@ local window = DrRayLibrary:Load("DrRay", "Default")
 
 We provide pre-made features for your convenience.
 
+(yesmeanshhs message)
+The UI library built-in features here isn't stated at all, so maybe stated in the code that the pre-made built-in features are making you aware of the real time (yes it shows up your clock, i made some adjustments to do so), and implementing your avatar profile in the UI library itself.
+
 ### Tab
 
 You can create multiple tabs to organize your features.
@@ -40,7 +43,7 @@ local tab = DrRayLibrary.newTab("My Tab", "ImageIdHere")
 
 **Argument 2: The Image ID (type: `string`)**
 
-## Label
+## Label (Added by editor because it is stated in the code)
 
 Create labels for tabs easily!
 
@@ -48,14 +51,19 @@ Create labels for tabs easily!
 tab.newLabel("This is a new label wow")
 ```
 
+**Argument 1: The Selected Label Text (type: `string`)**
+
 Update labels for your own importance
 
 ```lua
 local Label
 Label = tab.newLabel("This is a new label wow")
 task.wait(1)
+-- After 1 seconds it changes the label text into a new one
 Label:Update("New Text Label!")
 ```
+
+**Argument 1: The Selected New Text Label (type: `string`)**
 
 ### Button
 
@@ -82,11 +90,13 @@ Button = tab.newButton("Button", "Prints Hello!", function()
 end)
 task.wait(3)
 -- The button now can only be activated by code
+-- It also changes the title of the button
 Button:Update("New Button Name!",true)
 ```
 
-**Argument 1: New Name Of The Button (type: `string`)**
+**Variable definer: Defines the selected button you want to update through assigning with variables (type: `variable`)**
 
+**Argument 1: New Name Of The Button (type: `string`)**
 
 **Argument 2: Manual Activation (This makes the user can only activate the button through code) (type: `bool`)**
 
@@ -119,13 +129,13 @@ toggle = tab.newToggle("Toggle", "Toggle! (prints the state)", function(toggleSt
 end)
 
 task.wait(1)
--- The toggle is not able to be interacted by the user now
+-- The toggle is not able to be activated by the user now
 -- Update the toggle with the assigned variable and custom function
 toggle:Update(false,true,"Manual activation only title!")
 
 task.wait(1)
 -- Updating without changing the title
--- It is now able to be interacted by the user
+-- It is now able to be activated by the user
 toggle:Update(true,false)
 ```
 
@@ -184,14 +194,15 @@ end)
 
 task.wait(1)
 -- Refresh the dropdown by calling the variable custom function
-dropdown:Refresh({"New option!"})
+-- The dropdown buttons after 3 seconds is unable to be activated
+dropdown:Refresh({"You cant activate this!"},true)
 ```
 
 **Variable definer: Defines the selected dropdown you want to refresh through assigning with variables (type: `variable`)**
 
-**Argument 2: Table listing the new options (type: `table`)**
+**Argument 1: Table listing the new options (type: `table`)**
 
-**Argument 3: Manual Activation (This makes the user can only activate the dropdown buttons through code) (type: `bool`)**
+**Argument 2: Manual Activation (This makes the user can only activate the dropdown buttons through code) (type: `bool`)**
 
 ### Keybind
 
@@ -238,12 +249,15 @@ Slider = tab.newSlider("Slider", "Epic slider", 1000, false, function(num)
 end)
 task.wait(3)
 -- After 3 seconds the slider is only able to be activated by code
+-- It is also making the title changed
 Slider:Update("New Slider Name!",true)
 ```
 
-**Argument 1: Manual Activation (This makes the user can only activate the button through code) (type: `bool`)**
+**Variable definer: Defines the selected slider you want to update through assigning with variables (type: `variable`)**
 
-**Argument 2: Manual Activation (This makes the user can only activate the button through code) (type: `bool`)**
+**Argument 1: New Name For Slider (type: `string`)**
+
+**Argument 2: Manual Activation (This makes the user can only activate the slider through code) (type: `bool`)**
 
 ## Built-in UI Features
 
