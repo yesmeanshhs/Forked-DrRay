@@ -1644,6 +1644,8 @@ function UILIB.newTab(name, img)
 
 
 	function self.newSlider(name, desc, max, manageSlider, func)
+		local SliderFun = {}
+		local ManualActivation = false
 		local newSlider = reserved.Slider:Clone()
 
 		newSlider.MouseEnter:Connect(function()
@@ -1675,7 +1677,15 @@ function UILIB.newTab(name, img)
 		local MouseDown = false
 		local delayTw = 0.3
 
+		function SliderFun:Update(Title,ManualActivate)
+		local FixedMA = ManualActivate or false
+		ManualActivation = FixedMA
+		newSlider.Name = Title
+		newSlider.Title.Text = Title
+		end
+
 		local function Update()
+		if ManualActivation == false then
 			MouseDown = true
 			repeat
 				task.wait()
@@ -1691,6 +1701,7 @@ function UILIB.newTab(name, img)
 				local tween = tweenServ:Create(Fill, TweenInfo.new(delayTw, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Size = UDim2.fromScale(Percent, 1) })
 				tween:Play()
 			until MouseDown == false
+		end
 		end
 
 		Trigger.MouseButton1Down:Connect(Update)
