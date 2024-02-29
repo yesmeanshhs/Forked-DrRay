@@ -1,7 +1,21 @@
--- Instances: 147 | Scripts: 0 | Modules: 1
 local DRR = {};
 
-print("UI Library Loaded")
+print([[
+DrRay UI Library EV2 Loaded
+(Credit)
+Creator: Chillz
+Editor: Yesmeanshhs
+
+(DrRay EV2 Info)
+This is the newest version of DrRay UI Library, everything is almost finished and packed with more features
+The features this edited version provided:
+
+(1) Built-in Notification made by Editor yesmeanshhs
+(2) Ability to update half of the interactor (Buttons and etc.)
+(3) Provides more stability and more flexibility (ManualActivation is a feature to stop users abusing the buttons etc.)
+
+That's it, enjoy creating scripts with DrRay EV2 UI Library.
+]])
 
 -- DrRay
 DRR["1"] = Instance.new("ScreenGui", game:GetService("CoreGui"));
