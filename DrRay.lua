@@ -15,7 +15,7 @@ DRR["1b"] = Instance.new("ScreenGui",game:GetService("CoreGui"));
 DRR["1b"]["IgnoreGuiInset"] = true;
 DRR["1b"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 DRR["1b"]["Name"] = [[DrRayNotif]];
-DRR["1b"]["ZIndexBehavior"] = Enum.ZIndexBehaviour.Sibling;
+DRR["1b"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
 -- DrRay.TopBar
 DRR["2"] = Instance.new("Frame", DRR["1"]);
