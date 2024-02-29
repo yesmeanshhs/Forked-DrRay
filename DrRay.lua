@@ -10,6 +10,13 @@ DRR["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 DRR["1"]["Name"] = [[DrRay]];
 DRR["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
+-- DrRayNotif
+DRR["1b"] = Instance.new("ScreenGui",game:GetService("CoreGui"));
+DRR["1b"]["IgnoreGuiInset"] = true;
+DRR["1b"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
+DRR["1b"]["Name"] = [[DrRayNotif]];
+DRR["1b"]["ZIndexBehavior"] = Enum.ZIndexBehaviour.Sibling
+
 -- DrRay.TopBar
 DRR["2"] = Instance.new("Frame", DRR["1"]);
 DRR["2"]["BorderSizePixel"] = 0;
@@ -364,6 +371,58 @@ DRR["2f"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.f
 -- DrRay.Folder
 DRR["30"] = Instance.new("Folder", DRR["1"]);
 
+-- DrRay.Folder.NotifReserved
+DRR["1N"] = Instance.new("ScreenGui",DR["30"]);
+DRR["1N"]["IgnoreGuiInset"] = true;
+DRR["1N"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
+DRR["1N"]["Name"] = [[NotifReserved]];
+DRR["1N"]["ZIndexBehavior"] = Enum.ZIndexBehaviour.Sibling;
+DRR["1N"]["Enabled"] = false;
+
+-- DrRay.Folder.NotifReserved.NotifFrame
+DRR["1NA"] = Instance.new("Frame",DRR["1N"]);
+DRR["1NA"]["Name"] = [[NotifFrame]];
+DRR["1NA"]["Size"] = UDim2.new(0.25, 0, 0.1, 0);
+DRR["1NA"]["Position"] = UDim2.new(0.75, 0, 0.9, 0);
+DRR["1NA"]["BackgroundColor3"] = Color3.fromRGB(30, 30, 30);
+DRR["1NA"]["BorderSizePixel"] = 2;
+DRR["1NA"]["BorderColor3"] = Color3.fromRGB(50, 50, 50);
+
+-- DrRay.Folder.NotifReserved.NotifFrame.NCorner
+DRR["1NAC"] = Instance.new("UICorner",DRR["1NA"]);
+DRR["1NAC"]["CornerRadius"] = UDim.new(0.1, 0);
+DRR["1NAC"]["Name"] = [[NCorner]]
+
+-- DrRay.Folder.NotifReserved.NotifFrame.Title
+DRR["1NAT"] = Instance.new("TextLabel",DRR["1NA"]);
+DRR["1NAT"]["Name"] = [[Title]];
+DRR["1NAT"]["Text"] = [[Dummy Text]];
+DRR["1NAT"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+DRR["1NAT"]["Font"] = Enum.Font.GothamBold;
+DRR["1NAT"]["TextSize"] = 16;
+DRR["1NAT"]["Size"] = UDim2.new(1, 0, 0.5, 0);
+DRR["1NAT"]["Position"] = UDim2.new(0, 0, 0.05, 0);
+DRR["1NAT"]["BackgroundTransparency"] = 1;
+
+-- DrRay.Folder.NotifReserved.NotifFrame.Description
+DRR["1NAD"] = Instance.new("TextLabel",DRR["1NA"]);
+DRR["1NAD"]["Name"] = [[Description]];
+DRR["1NAD"]["Text"] = [[Test]];
+DRR["1NAD"]["TextColor3"] = Color3.fromRGB(200, 200, 200);
+DRR["1NAD"]["Font"] = Enum.Font.Gotham;
+DRR["1NAD"]["TextSize"] = 14;
+DRR["1NAD"]["Size"] = UDim2.new(1, 0, 0.45, 0);
+DRR["1NAD"]["Position"] = UDim2.new(0, 0, 0.5, 0);
+DRR["1NAD"]["BackgroundTransparency"] = 1;
+DRR["1NAD"]["TextWrapped"] = true;
+
+-- DrRay.Folder.ReservedNotif.NotifFrame.ProgressBar
+DRR["1NAP"] = Instance.new("Frame",DRR["1N"]);
+DRR["1NAP"]["Name"] = [[ProgressBar]];
+DRR["1NAP"]["Size"] = UDim2.new(1, 0, 0.05, 0);
+DRR["1NAP"]["Position"] = UDim2.new(0, 0, 0.95, 0);
+DRR["1NAP"]["BackgroundColor3"] = Color3.fromRGB(0, 162, 255);
+DRR["1NAP"]["BorderSizePixel"] = 0;
 
 -- DrRay.Folder.TabReserved
 DRR["31"] = Instance.new("ScrollingFrame", DRR["30"]);
@@ -1279,6 +1338,7 @@ Closure = function()
     local script = DRR["93"];
 local UILIB = {}
 local parent  = script.Parent
+local notifparent = DRR["1b"]
 local reserved = parent.Folder
 UILIB.__index = UILIB
 
@@ -1434,12 +1494,52 @@ function UILIB:Load(name, img, direction)
 
 end
 
-
-
-
-
-
-
+function self:Notify(Title,Desc,Dur,Color,SoundId)
+local sid = SoundId or "rbxassetid://0"
+local clr = Color or Color3.fromRGB(255,255,255)
+local ClonedNotif = parent.Folder.NotifFrame:Clone()
+local NotifSound = Instance.new("Sound",ClonedNotif)
+NotifSound.SoundId = sid
+NotifSound.Volume = 1.5
+NotifSound.Looped = false
+local Amount = notifparent:GetChildren()
+task.wait()
+ClonedNotif.Parent = notifparent
+ClonedNotif.Title.Text = Title
+ClonedNotif.Description.Text = Desc
+ClonedNotif.ProgressBar.BackgroundColor3 = clr
+ClonedNotif.Title.TextColor3 = clr
+local NotifMaxedOut = false
+for _, x in ipairs(notifparent:GetChildren()) do
+if x ~= nil then
+if _ >= 7 then
+NotifMaxedOut = true
+game:GetService"Debris":AddItem(x,0)
+end
+end
+end
+for _, x in pairs(notifparent:GetChildren()) do
+if x ~= nil and NotifMaxedOut == false then
+x:TweenPosition(UDim2.new(0.75,0,x.Position.Y.Scale - 0.15,0),"Out","Quint",0.5,true)
+end
+end
+if NotifMaxedOut == true then
+return
+end
+if #Amount ~= 0 then
+ClonedNotif:TweenPosition(UDim2.new(0.75,0,0.8,0),"Out","Quint",0.5,true)
+else
+ClonedNotif:TweenPosition(UDim2.new(0.75,0,0.8,0),"Out","Quint",0.5,true)
+end
+NotifSound:Play()
+ClonedNotif.ProgressBar:TweenSize(UDim2.new(0,0,0.05,0),"Out","Linear",Dur,true)
+delay(Dur,function()
+repeat task.wait(0.01)
+ClonedNotif:TweenPosition(UDim2.new(0.75,0,1.5,0),"In","Quint",0.5,false)
+until ClonedNotif.Position == UDim2.new(0.75,0,1.5,0)
+game:GetService("Debris"):AddItem(ClonedNotif,0)
+end)
+end
 
 
 
