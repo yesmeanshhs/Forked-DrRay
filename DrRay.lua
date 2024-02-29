@@ -2,9 +2,9 @@ local DRR = {};
 
 print([[
 DrRay UI Library EV2 Loaded
-(Credit)
-Creator: Chillz
-Editor: Yesmeanshhs
+(Credits)
+UI Library Creator: Chillz
+UI Library Editor: Yesmeanshhs
 
 (DrRay EV2 Info)
 This is the newest version of DrRay UI Library, everything is almost finished and packed with more features
@@ -386,7 +386,7 @@ DRR["2f"]["Color"] = ColorSequence.new{ColorSequenceKeypoint.new(0.000, Color3.f
 DRR["30"] = Instance.new("Folder", DRR["1"]);
 
 -- DrRay.Folder.NotifReserved
-DRR["1N"] = Instance.new("ScreenGui",DR["30"]);
+DRR["1N"] = Instance.new("ScreenGui",DRR["30"]);
 DRR["1N"]["IgnoreGuiInset"] = true;
 DRR["1N"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 DRR["1N"]["Name"] = [[NotifReserved]];
