@@ -15,7 +15,7 @@ DRR["1b"] = Instance.new("ScreenGui",game:GetService("CoreGui"));
 DRR["1b"]["IgnoreGuiInset"] = true;
 DRR["1b"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 DRR["1b"]["Name"] = [[DrRayNotif]];
-DRR["1b"]["ZIndexBehavior"] = Enum.ZIndexBehaviour.Sibling
+DRR["1b"]["ZIndexBehavior"] = Enum.ZIndexBehaviour.Sibling;
 
 -- DrRay.TopBar
 DRR["2"] = Instance.new("Frame", DRR["1"]);
@@ -1495,7 +1495,7 @@ function UILIB:Load(name, img, direction)
 end
 
 function self:Notify(Title,Desc,Dur,Color,SoundId)
-local sid = SoundId or "rbxassetid://0"
+local sid = SoundId or "rbxassetid://195868961"
 local clr = Color or Color3.fromRGB(255,255,255)
 local ClonedNotif = parent.Folder.NotifFrame:Clone()
 local NotifSound = Instance.new("Sound",ClonedNotif)
