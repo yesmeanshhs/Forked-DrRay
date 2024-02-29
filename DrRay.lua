@@ -376,7 +376,7 @@ DRR["1N"] = Instance.new("ScreenGui",DR["30"]);
 DRR["1N"]["IgnoreGuiInset"] = true;
 DRR["1N"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 DRR["1N"]["Name"] = [[NotifReserved]];
-DRR["1N"]["ZIndexBehavior"] = Enum.ZIndexBehaviour.Sibling;
+DRR["1N"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 DRR["1N"]["Enabled"] = false;
 
 -- DrRay.Folder.NotifReserved.NotifFrame
