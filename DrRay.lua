@@ -1506,8 +1506,6 @@ function UILIB:Load(name, img, direction)
 		end
 	end
 
-end
-
 function self:Notify(Title,Desc,Dur,Color,SoundId)
 local sid = SoundId or "rbxassetid://195868961"
 local clr = Color or Color3.fromRGB(255,255,255)
@@ -1553,6 +1551,8 @@ ClonedNotif:TweenPosition(UDim2.new(0.75,0,1.5,0),"In","Quint",0.5,false)
 until ClonedNotif.Position == UDim2.new(0.75,0,1.5,0)
 game:GetService("Debris"):AddItem(ClonedNotif,0)
 end)
+end
+
 end
 
 
