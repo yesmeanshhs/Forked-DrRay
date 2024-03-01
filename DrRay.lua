@@ -1456,10 +1456,10 @@ function UILIB:Load(name, img, direction)
 		DRR["1f"].Visible = false
 	end
         function self:Hide()
-		DDR["1"].Enabled = false
+		parent.Enabled = false
 	end
 	function self:Show()
-		DDR["1"].Enabled = true
+		parent.Enabled = true
         end
 	function self:Toggle()
 		if closed == false then
