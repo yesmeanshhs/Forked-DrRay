@@ -1368,7 +1368,7 @@ parent.TopBar.ProfileMenu.PlayerProfile.ImageLabel.Image = game:GetService("Play
 
 
 function UILIB:Load(name, img, direction)
-	self = setmetatable({}, UILIB)
+	local self = setmetatable({}, UILIB)
 	task.spawn(function()
 			local tw = twServ:Create(parent.MainBar, TweenInfo.new(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), { Position = UDim2.new(0.23, 0,0.212, 0) })
 			local tw2 = twServ:Create(parent.TopBar, TweenInfo.new(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Position = UDim2.new(0.23, 0,0.012, 0) })
@@ -1552,13 +1552,14 @@ until ClonedNotif.Position == UDim2.new(0.75,0,1.5,0)
 game:GetService("Debris"):AddItem(ClonedNotif,0)
 end)
 end
-
+return self
 end
 
 
 
 
 function UILIB.newTab(name, img)
+	local self = setmetatable({}, UILIB)
 
 	local newTab = parent.Folder.TabReserved:Clone()
 	newTab.Parent = parent.MainBar
