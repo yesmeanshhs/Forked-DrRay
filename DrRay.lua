@@ -431,7 +431,7 @@ DRR["1NAD"]["BackgroundTransparency"] = 1;
 DRR["1NAD"]["TextWrapped"] = true;
 
 -- DrRay.Folder.ReservedNotif.NotifFrame.ProgressBar
-DRR["1NAP"] = Instance.new("Frame",DRR["1N"]);
+DRR["1NAP"] = Instance.new("Frame",DRR["1NA"]);
 DRR["1NAP"]["Name"] = [[ProgressBar]];
 DRR["1NAP"]["Size"] = UDim2.new(1, 0, 0.05, 0);
 DRR["1NAP"]["Position"] = UDim2.new(0, 0, 0.95, 0);
