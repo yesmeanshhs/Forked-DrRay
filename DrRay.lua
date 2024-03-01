@@ -1368,7 +1368,7 @@ parent.TopBar.ProfileMenu.PlayerProfile.ImageLabel.Image = game:GetService("Play
 
 
 function UILIB:Load(name, img, direction)
-	local self = setmetatable({}, UILIB)
+	self = setmetatable({}, UILIB)
 	task.spawn(function()
 			local tw = twServ:Create(parent.MainBar, TweenInfo.new(0.4, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), { Position = UDim2.new(0.23, 0,0.212, 0) })
 			local tw2 = twServ:Create(parent.TopBar, TweenInfo.new(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.In), { Position = UDim2.new(0.23, 0,0.012, 0) })
@@ -1558,8 +1558,7 @@ end
 
 
 
-function UILIB.newTab(name, img)	
-	local self = setmetatable({}, UILIB)
+function UILIB.newTab(name, img)
 
 	local newTab = parent.Folder.TabReserved:Clone()
 	newTab.Parent = parent.MainBar
