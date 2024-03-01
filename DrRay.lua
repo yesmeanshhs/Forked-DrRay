@@ -1352,7 +1352,7 @@ Closure = function()
     local script = DRR["93"];
 local UILIB = {}
 local parent  = script.Parent
-local notifparent = DRR["1b"]
+local notifparent = game:GetService("CoreGui"):FindFirstChild("DrRayNotif")
 local reserved = parent.Folder
 UILIB.__index = UILIB
 
@@ -1514,15 +1514,15 @@ local NotifSound = Instance.new("Sound",ClonedNotif)
 NotifSound.SoundId = sid
 NotifSound.Volume = 1.5
 NotifSound.Looped = false
-local Amount = notifparent:GetChildren()
+local Amount = game:GetService("CoreGui"):FindFirstChild("DrRayNotif"):GetChildren()
 task.wait()
-ClonedNotif.Parent = notifparent
+ClonedNotif.Parent = game:GetService("CoreGui"):FindFirstChild("DrRayNotif")
 ClonedNotif.Title.Text = Title
 ClonedNotif.Description.Text = Desc
 ClonedNotif.ProgressBar.BackgroundColor3 = clr
 ClonedNotif.Title.TextColor3 = clr
 local NotifMaxedOut = false
-for _, x in ipairs(notifparent:GetChildren()) do
+for _, x in ipairs(game:GetService("CoreGui"):FindFirstChild("DrRayNotif"):GetChildren()) do
 if x ~= nil then
 if _ >= 7 then
 NotifMaxedOut = true
@@ -1530,7 +1530,7 @@ game:GetService"Debris":AddItem(x,0)
 end
 end
 end
-for _, x in pairs(notifparent:GetChildren()) do
+for _, x in pairs(game:GetService("CoreGui"):FindFirstChild("DrRayNotif"):GetChildren()) do
 if x ~= nil and NotifMaxedOut == false then
 x:TweenPosition(UDim2.new(0.75,0,x.Position.Y.Scale - 0.15,0),"Out","Quint",0.5,true)
 end
