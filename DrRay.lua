@@ -1509,7 +1509,7 @@ function UILIB:Load(name, img, direction)
 function self:Notify(Title,Desc,Dur,Color,SoundId)
 local sid = SoundId or "rbxassetid://195868961"
 local clr = Color or Color3.fromRGB(255,255,255)
-local ClonedNotif = parent.Folder.NotifFrame:Clone()
+local ClonedNotif = parent.Folder.NotifReserved.NotifFrame:Clone()
 local NotifSound = Instance.new("Sound",ClonedNotif)
 NotifSound.SoundId = sid
 NotifSound.Volume = 1.5
