@@ -1525,8 +1525,9 @@ ClonedNotif.Title.Text = Title
 ClonedNotif.Description.Text = Desc
 ClonedNotif.ProgressBar.BackgroundColor3 = clr
 ClonedNotif.Title.TextColor3 = clr
-local textBoundsSize = ClonedNotif.Description.TextBounds
-ClonedNotif.Size = UDim2.new(0.25, 0, 0.1 + (textBoundsSize.Y/1.1), 0)
+local bounds = game.TextService:GetTextSize(ClonedNotif.Description.Text,ClonedNotif.Description.TextSize,ClonedNotif.Description.Font,Vector2.new(ClonedNotif.AbsoluteSize.X,ClonedNotif.AbsoluteSize.Y))
+ClonedNotif.Size = UDim2.new(0.25, 0, 0.1 + (bounds.Y/300), 0)
+ClonedNotif.ProgressBar.Position = UDim2.new(0, 0, 0.95 + (bounds.Y/700), 0)
 local NotifMaxedOut = false
 for _, x in ipairs(game:GetService("CoreGui"):FindFirstChild("DrRayNotif"):GetChildren()) do
 if x ~= nil then
@@ -1538,17 +1539,13 @@ end
 end
 for _, x in pairs(game:GetService("CoreGui"):FindFirstChild("DrRayNotif"):GetChildren()) do
 if x ~= nil and NotifMaxedOut == false then
-x:TweenPosition(UDim2.new(0.75,0,x.Position.Y.Scale - 0.15,0),"Out","Quint",0.5,true)
+x:TweenPosition(UDim2.new(0.75,0,x.Position.Y.Scale - (0.15 + bounds.Y/300),0),"Out","Quint",0.5,true)
 end
 end
 if NotifMaxedOut == true then
 return
 end
-if #Amount ~= 0 then
-ClonedNotif:TweenPosition(UDim2.new(0.75,0,0.8,0),"Out","Quint",0.5,true)
-else
-ClonedNotif:TweenPosition(UDim2.new(0.75,0,0.8,0),"Out","Quint",0.5,true)
-end
+ClonedNotif:TweenPosition(UDim2.new(0.75,0,0.8 - (bounds.Y/400),0),"Out","Quint",0.5,true)
 NotifSound:Play()
 ClonedNotif.ProgressBar:TweenSize(UDim2.new(0,0,0.05,0),"Out","Linear",Dur,true)
 delay(Dur,function()
