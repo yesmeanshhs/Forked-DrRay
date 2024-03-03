@@ -1521,7 +1521,7 @@ ClonedNotif.Title.Text = Title
 ClonedNotif.Description.Text = Desc
 ClonedNotif.ProgressBar.BackgroundColor3 = clr
 ClonedNotif.Title.TextColor3 = clr
-local textBoundsSize = ClonedNotif.Description.TextBounds.Size
+local textBoundsSize = ClonedNotif.Description.TextBounds
 ClonedNotif.Size = UDim2.new(0.25, 0, 0.1 + textBoundsSize.Y + 5, 0)
 local NotifMaxedOut = false
 for _, x in ipairs(game:GetService("CoreGui"):FindFirstChild("DrRayNotif"):GetChildren()) do
