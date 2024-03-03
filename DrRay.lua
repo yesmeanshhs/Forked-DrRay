@@ -24,12 +24,16 @@ DRR["1"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 DRR["1"]["Name"] = [[DrRay]];
 DRR["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
+print("Successfully created ui holder: "..DRR["1"]:GetFullName())
+
 -- DrRayNotif
 DRR["1b"] = Instance.new("ScreenGui",game:GetService("CoreGui"));
 DRR["1b"]["IgnoreGuiInset"] = true;
 DRR["1b"]["ScreenInsets"] = Enum.ScreenInsets.DeviceSafeInsets;
 DRR["1b"]["Name"] = [[DrRayNotif]];
 DRR["1b"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+
+print("Successully created notification holder: "..DRR["1b"]:GetFullName())
 
 -- DrRay.TopBar
 DRR["2"] = Instance.new("Frame", DRR["1"]);
