@@ -1676,11 +1676,15 @@ function UILIB.newTab(name, img)
 		newInput.Description.Text = desc
 		newInput.Name = name
 
-		function InputFun:Update(Title,ManualActivate)
+		function InputFun:Update(Title,Placeholder,Txt,ManualActivate)
+		local pholder = Placeholder or ""
+		local txtx = Txt or textbox.Text
 		local FixedMA = ManualActivate or false
 		ManualActivation = FixedMA
 		newInput.Name = Title
 		newInput.Title.Text = Title
+		textbox.Text = txtx
+		textbox.PlaceholderText = pholder
 		end
 
 		textbox.FocusLost:Connect(function() 
